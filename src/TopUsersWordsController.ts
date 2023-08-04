@@ -10,14 +10,14 @@ export class TopUsersWordsController {
       'https://hacker-news.firebaseio.com/v0/newstories.json',
     );
     const stories = await Promise.all(
-      _.take(response.data, 300).map(async (id) => {
+      _.take(response.data, 600).map(async (id) => {
         const storyResponse = await axios.get(
           `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
         );
         return storyResponse.data;
       }),
     );
-
+      _.uniqBy(stories,'store.by');
      const users = await Promise.all(
           stories.map(async (store) => {
             const userResponse = await axios.get( `https://hacker-news.firebaseio.com/v0/user/${store.by}.json`);
@@ -26,7 +26,7 @@ export class TopUsersWordsController {
           })
         );
         const filter = users.filter(x => x != null) as string[];
-        const topUsers = _.take(_.orderBy(_.uniqBy(filter,'store.by'), 'karma', 'desc'),10).map(x => x.title);
+        const topUsers = _.take(_.orderBy(filter, 'karma', 'desc'),10).map(x => x.title);
        const words = _.words(topUsers.join(' '));
 
           const myArray = _.map(_.countBy(words), (value, key) => ({ key, value }));
