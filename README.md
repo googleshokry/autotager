@@ -45,33 +45,13 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
+# Apis
 
-```Apis
-# unit tests
+http://localhost:3000/words/last-stories
 
-http://localhost:3000/recent-words
-
-http://localhost:3000/top-users-words
-
-http://localhost:3000/top-words
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+http://localhost:3000/words/last-top-user-stories
 ```
 
 ## Support
